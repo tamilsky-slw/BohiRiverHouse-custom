@@ -1,0 +1,29 @@
+name: Tag Latest Commit
+on:
+  push:
+    branches: [ main ]  # Preverite, da je ime veje pravilno (main/master)
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Omogoči pisanje oznak
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Potegne celotno zgodovino commitov
+
+    - name: Delete old 'latest' tag (če obstaja)
+      run: |
+        git tag -d latest || true
+        git push origin --delete latest || true
+
+    - name: Create and push new 'latest' tag
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Avtentikacija s tokenom
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git tag -f latest HEAD  # Sili premik oznake na trenutni HEAD
+        git push origin latest -f
