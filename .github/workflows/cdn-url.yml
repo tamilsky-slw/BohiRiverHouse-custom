@@ -1,0 +1,16 @@
+name: Generate CDN URL
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  generate-url:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Extract short SHA
+      id: sha
+      run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+    - name: Print CDN URL
+      run: |
+        echo "✅ CDN URL: https://cdn.jsdelivr.net/gh/tamilsky-slw/BohiRiverHouse-custom@main/BohiRiverHouse-custom.css?v=${{ steps.sha.outputs.SHORT_SHA }}"
