@@ -739,15 +739,17 @@ a
 
 .BOOK_divAdjustAndBook .btn-primary
 {
-    background-color: #bc9731;
-    border-color: #bc9731;
+    background-color: #cba659;
+    border-color: #cba659;
+    border-radius: 8px 8px 8px 8px;
+    font-weight: 600;
     float: right;
 }
 .BOOK_divAdjustAndBook .btn-primary:hover
 {
     color:#fff;
-    background-color:#947726;
-    border-color:#8b7024
+    background-color:#e6ad38;
+    border-color:#e6ad38
 }
 
 .BOOK_pageHeaderTitle
